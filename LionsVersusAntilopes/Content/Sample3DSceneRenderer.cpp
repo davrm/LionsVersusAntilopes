@@ -41,12 +41,19 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 	// this transform should not be applied.
 
 	// This sample makes use of a right-handed coordinate system using row-major matrices.
-	XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovRH(
+	/*XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovRH(
 		fovAngleY,
 		aspectRatio,
 		0.01f,
 		100.0f
-		);
+		);*/
+
+	XMMATRIX perspectiveMatrix = XMMatrixOrthographicRH(
+		outputSize.Width/50,
+		outputSize.Height/50,
+		0.01f,
+		100.0f
+	);
 
 	XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
 
@@ -58,8 +65,8 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources()
 		);
 
 	// Eye is at (0,0.7,1.5), looking at point (0,-0.1,0) with the up-vector along the y-axis.
-	static const XMVECTORF32 eye = { 0.0f, 0.7f, 1.5f, 0.0f };
-	static const XMVECTORF32 at = { 0.0f, -0.1f, 0.0f, 0.0f };
+	static const XMVECTORF32 eye = { 0.0f, 0.0f, 1.5f, 0.0f };
+	static const XMVECTORF32 at = { 0.0f, 0.0f, 0.0f, 0.0f };
 	static const XMVECTORF32 up = { 0.0f, 1.0f, 0.0f, 0.0f };
 
 	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixLookAtRH(eye, at, up)));

@@ -67,14 +67,33 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="LionsVersusAntilopesMain.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="GameObjectSprite.cpp" />
+    <ClCompile Include="Lion.cpp" />
+    <ClCompile Include="Antilope.cpp" />
+    <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="GameObjectAnimal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="LionsVersusAntilopesMain.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="GameObjectSprite.h" />
+    <ClInclude Include="Lion.h" />
+    <ClInclude Include="Antilope.h" />
+    <ClInclude Include="Flag.h" />
+    <ClInclude Include="GameObjectAnimal.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="C:\Users\drmsk\Desktop\cat.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="lion.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="antilope.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
