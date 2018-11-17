@@ -6,7 +6,7 @@ namespace LionsVersusAntilopes
 		public GameObjectAnimal
 	{
 	public:
-		Antilope(const std::shared_ptr<DX::DeviceResources>& deviceResources) : GameObjectAnimal(deviceResources) {}
+		Antilope(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string file_name) : GameObjectAnimal(deviceResources, file_name) {}
 		~Antilope();
 		void Update(DX::StepTimer const& timer) override;
 	};

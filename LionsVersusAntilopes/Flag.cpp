@@ -10,4 +10,23 @@ Flag::~Flag()
 
 void Flag::Update(DX::StepTimer const & timer)
 {
+	if (m_isTransported) SetTargetPoint(m_transporter->GetPos(), 3, GetPos());
+	else SetTargetPoint(m_originPoint);
+}
+
+bool Flag::IsInspawn()
+{
+	return DirectX::SimpleMath::Vector2::Distance(m_originPoint,GetPos()) < 3;
+}
+
+void Flag::SetTransporter(GameObjectSprite * transporter)
+{
+	m_transporter = transporter;
+	m_isTransported = true;
+}
+
+void Flag::Release()
+{
+	m_transporter = nullptr;
+	m_isTransported = true;
 }

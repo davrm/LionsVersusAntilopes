@@ -24,7 +24,7 @@ LionsVersusAntilopesMain::LionsVersusAntilopesMain(const std::shared_ptr<DX::Dev
 
 	m_fpsTextRenderer = std::unique_ptr<SampleFpsTextRenderer>(new SampleFpsTextRenderer(m_deviceResources));
 
-	m_gameObjectSprite = std::unique_ptr<GameObjectSprite>(new GameObjectSprite(m_deviceResources));
+	m_gameObjectSprite = std::unique_ptr<GameObjectSprite>(new GameObjectSprite(m_deviceResources, std::string("flag.png")));
 
 	// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	// e.g. for 60 FPS fixed timestep update logic, call:

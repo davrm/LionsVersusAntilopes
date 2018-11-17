@@ -8,13 +8,20 @@ namespace LionsVersusAntilopes
 	class GameObjectSprite
 	{
 	public:
-		GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+		GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string file_name);
 		~GameObjectSprite();
 		void UpdateMovement(DX::StepTimer const& timer);
 		virtual void Update(DX::StepTimer const& timer);
 		void Render();
 		void Reset();
 		void SetTargetpoint(DirectX::SimpleMath::Vector2 target);
+		void SetPos(DirectX::SimpleMath::Vector2 pos);
+		void SetTargetPoint(DirectX::SimpleMath::Vector2 pos, double dist = 0.0, DirectX::SimpleMath::Vector2 origin = DirectX::SimpleMath::Vector2::Zero);
+		DirectX::SimpleMath::Vector2 GetPos();
+	protected:
+		// Movement
+		double m_speed = 0.2f;
+		double m_cont = 0;
 	private:
 		// Sprite 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
@@ -23,11 +30,11 @@ namespace LionsVersusAntilopes
 		DirectX::SimpleMath::Vector2 m_origin;
 		const std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		std::unique_ptr<DirectX::CommonStates> m_states;
-	protected:
+		std::string m_fileImageName;
 		// Movement
 		DirectX::SimpleMath::Vector2 m_targetPoint;
-		double m_speed = 0.2f;
-		double m_cont = 0;
+		// Scale Position
+		double m_multScalePosition = 10.0;
 	};
 }
 

@@ -8,17 +8,19 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 using Microsoft::WRL::ComPtr;
 
-GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources):m_deviceResources(deviceResources)
+GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string file_name):m_deviceResources(deviceResources) , m_fileImageName(file_name)
 {	
+	// std::string to std::wstring for conversion to const wchar_t *
+	std::wstring widestr = std::wstring(m_fileImageName.begin(), m_fileImageName.end());
 	// Create Sprite
 	DX::ThrowIfFailed(
-		CreateWICTextureFromFile(m_deviceResources->GetD3DDevice(), L"antilope.png", nullptr,
+		CreateWICTextureFromFile(m_deviceResources->GetD3DDevice(), widestr.c_str(), nullptr,
 			m_texture.ReleaseAndGetAddressOf()));
 	m_spriteBatch = std::make_unique<SpriteBatch>(m_deviceResources->GetD3DDeviceContext());
 
 	ComPtr<ID3D11Resource> resource;
 	DX::ThrowIfFailed(
-		CreateWICTextureFromFile(m_deviceResources->GetD3DDevice(), L"antilope.png",
+		CreateWICTextureFromFile(m_deviceResources->GetD3DDevice(), widestr.c_str(),
 			resource.GetAddressOf(),
 			m_texture.ReleaseAndGetAddressOf()));
 	// Get Origin Point for the Sprite
@@ -70,5 +72,25 @@ void GameObjectSprite::Reset()
 void GameObjectSprite::SetTargetpoint(Vector2 target)
 {
 	m_targetPoint = target;
+}
+
+void LionsVersusAntilopes::GameObjectSprite::SetPos(DirectX::SimpleMath::Vector2 pos)
+{
+	m_screenPos = pos * m_multScalePosition;
+}
+
+void LionsVersusAntilopes::GameObjectSprite::SetTargetPoint(DirectX::SimpleMath::Vector2 pos, double dist, DirectX::SimpleMath::Vector2 origin)
+{
+	if (dist == 0) m_targetPoint = pos;
+	else {
+		DirectX::SimpleMath::Vector2 dir = DirectX::SimpleMath::Vector2(origin.x - pos.x, origin.y - pos.y);
+		dir.Normalize();
+		m_targetPoint = dir * dist;
+	}
+}
+
+DirectX::SimpleMath::Vector2 LionsVersusAntilopes::GameObjectSprite::GetPos()
+{
+	return m_screenPos / m_multScalePosition;
 }
 

@@ -6,6 +6,7 @@
 #include "Content\SampleFpsTextRenderer.h"
 #include "GameObjectSprite.h"
 
+
 // Renders Direct2D and 3D content on the screen.
 namespace LionsVersusAntilopes
 {

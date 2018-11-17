@@ -197,11 +197,13 @@
     <Image Include="Assets\StoreLogo.png" />
     <Image Include="Assets\Wide310x150Logo.scale-200.png" />
     <Image Include="C:\Users\drmsk\Desktop\cat.png" />
+    <Image Include="flag.png" />
     <Image Include="lion.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Antilope.h" />
     <ClInclude Include="App.h" />
+    <ClInclude Include="BehaviourTree.h" />
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="GameObjectAnimal.h" />
@@ -218,6 +220,7 @@
   <ItemGroup>
     <ClCompile Include="Antilope.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="BehaviourTree.cpp" />
     <ClCompile Include="Common\DeviceResources.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameObjectAnimal.cpp" />
