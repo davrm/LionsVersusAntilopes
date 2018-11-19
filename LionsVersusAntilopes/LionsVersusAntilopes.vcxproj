@@ -206,6 +206,7 @@
     <ClInclude Include="BehaviourTree.h" />
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObjectAnimal.h" />
     <ClInclude Include="GameObjectSprite.h" />
     <ClInclude Include="Lion.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Content\Sample3DSceneRenderer.h" />
     <ClInclude Include="Content\SampleFpsTextRenderer.h" />
     <ClInclude Include="Content\ShaderStructures.h" />
+    <ClInclude Include="DataLoader.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -223,12 +225,14 @@
     <ClCompile Include="BehaviourTree.cpp" />
     <ClCompile Include="Common\DeviceResources.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObjectAnimal.cpp" />
     <ClCompile Include="GameObjectSprite.cpp" />
     <ClCompile Include="Lion.cpp" />
     <ClCompile Include="LionsVersusAntilopesMain.cpp" />
     <ClCompile Include="Content\SampleFpsTextRenderer.cpp" />
     <ClCompile Include="Content\Sample3DSceneRenderer.cpp" />
+    <ClCompile Include="DataLoader.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -252,6 +256,9 @@
     <FxCompile Include="Content\SampleVertexShader.hlsl">
       <ShaderType>Vertex</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="GameData.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

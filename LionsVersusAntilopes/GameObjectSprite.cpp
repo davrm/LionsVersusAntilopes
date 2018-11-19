@@ -8,7 +8,9 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 using Microsoft::WRL::ComPtr;
 
-GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string file_name):m_deviceResources(deviceResources) , m_fileImageName(file_name)
+GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
+	std::string file_name, double image_scale, Vector2 init_point):
+	m_deviceResources(deviceResources) , m_fileImageName(file_name) , m_imageScale(image_scale)
 {	
 	// std::string to std::wstring for conversion to const wchar_t *
 	std::wstring widestr = std::wstring(m_fileImageName.begin(), m_fileImageName.end());
@@ -31,15 +33,11 @@ GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& d
 	m_origin.x = float(catDesc.Width / 2);
 	m_origin.y = float(catDesc.Height / 2);
 	// Initial Point
-	m_screenPos.x = 0;
-	m_screenPos.y = 0;
+	SetPos(init_point);
 	// Get State for Alpha Mode in the Sprite
 	m_states = std::make_unique<CommonStates>(m_deviceResources->GetD3DDevice());
 }
 
-GameObjectSprite::~GameObjectSprite()
-{
-}
 
 void GameObjectSprite::UpdateMovement(DX::StepTimer const & timer)
 {
@@ -58,7 +56,7 @@ void GameObjectSprite::Render()
 	// Render Of the Sprite
 	m_spriteBatch->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
 	m_spriteBatch->Draw(m_texture.Get(), offset + m_screenPos, nullptr, Colors::White,
-		0.f, m_origin,0.1f);
+		0.f, m_origin, m_imageScale);
 	m_spriteBatch->End();
 }
 

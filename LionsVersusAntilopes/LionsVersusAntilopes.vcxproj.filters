@@ -73,6 +73,8 @@
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameObjectAnimal.cpp" />
     <ClCompile Include="BehaviourTree.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="DataLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -84,6 +86,8 @@
     <ClInclude Include="Flag.h" />
     <ClInclude Include="GameObjectAnimal.h" />
     <ClInclude Include="BehaviourTree.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="DataLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\StoreLogo.png">
@@ -108,5 +112,8 @@
   <ItemGroup>
     <None Include="LionsVersusAntilopes_TemporaryKey.pfx" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="GameData.xml" />
   </ItemGroup>
 </Project>

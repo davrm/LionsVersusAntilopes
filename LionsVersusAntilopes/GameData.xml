@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+  <numberAnimals
+    lions ="3"
+    antilopes ="7">
+  </numberAnimals>
+
+  <flag
+    image = "flag.png"
+    imageScale = "0.1">
+  </flag>
+
+  <lion
+    image = "lion.png"
+    imageScale = "0.1"
+    life = "100"
+    damage ="10"
+    distanceWhenAnimalIsFar ="20"
+    distanceToComeClose="3"
+    distanceToApproach="6"
+    distanceToCaptureFlag="4">
+  </lion>
+
+  <antilope
+    image = "antilope.png"
+    imageScale = "0.1"
+    life = "100"
+    damage ="10"
+    distanceWhenAnimalIsFar ="20"
+    distanceToComeClose="3"
+    distanceToApproach="6"
+    distanceToCaptureFlag="4">
+  </antilope>
+
+</root>
