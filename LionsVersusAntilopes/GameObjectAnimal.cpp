@@ -23,7 +23,7 @@ bool GameObjectAnimal::IsFarFromOtherAnimalsOfMyTeam()
 {
 	GameObjectAnimal* nearest_ally = GetNearestAlly();
 	if (nearest_ally == nullptr) return false;
-	if(m_distanceWhenAnimalIsFar > DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos())) return true;
+	if(m_distanceWhenAnimalIsFar < DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos())) return true;
 	else return false;
 }
 
@@ -85,4 +85,14 @@ void GameObjectAnimal::setEnemyFlag(Flag * flag)
 void GameObjectAnimal::setTeamFlag(Flag * flag)
 {
 	m_myFlag = flag;
+}
+
+void GameObjectAnimal::setAllies(std::vector<GameObjectAnimal*> allies)
+{
+	m_alliesInView = allies;
+}
+
+void GameObjectAnimal::setEnemies(std::vector<GameObjectAnimal*> enemies)
+{
+	m_enemiesInView = enemies;
 }

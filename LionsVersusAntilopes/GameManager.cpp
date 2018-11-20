@@ -45,6 +45,21 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 		m_lionTeam.push_back(temp_lion);
 	}
 
+
+	for (std::vector<GameObjectAnimal *>::iterator it = m_antilopeTeam.begin(); it != m_antilopeTeam.end(); ++it) {
+		std::vector<GameObjectAnimal*> tempCopy(m_antilopeTeam);
+		tempCopy.erase(std::find(tempCopy.begin(), tempCopy.end(), *it));
+		(*it)->setAllies(tempCopy);
+		(*it)->setEnemies(m_lionTeam);
+	}
+
+	for (std::vector<GameObjectAnimal *>::iterator it = m_lionTeam.begin(); it != m_lionTeam.end(); ++it) {
+		std::vector<GameObjectAnimal*> tempCopy(m_lionTeam);
+		tempCopy.erase(std::find(tempCopy.begin(), tempCopy.end(), *it));
+		(*it)->setAllies(tempCopy);
+		(*it)->setEnemies(m_antilopeTeam);
+	}
+
 }
 
 GameManager * GameManager::m_instance = 0;

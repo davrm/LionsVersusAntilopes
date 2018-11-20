@@ -31,6 +31,8 @@ namespace LionsVersusAntilopes
 
 		void setEnemyFlag(Flag * flag);
 		void setTeamFlag(Flag * flag);
+		void setAllies(std::vector<GameObjectAnimal*> allies);
+		void setEnemies(std::vector<GameObjectAnimal*> enemies);
 	private:
 		double m_life;
 		double m_damage;

@@ -16,8 +16,8 @@ namespace LionsVersusAntilopes
 	private:
 		static GameManager * m_instance;
 		std::vector<GameObjectSprite*> m_objectsToRender;
-		std::vector<Lion*> m_lionTeam;
-		std::vector<Antilope*> m_antilopeTeam;
+		std::vector<GameObjectAnimal*> m_lionTeam;
+		std::vector<GameObjectAnimal*> m_antilopeTeam;
 		Flag * m_lionTeamFlag;
 		Flag * m_antilopeTeamFlag;
 
