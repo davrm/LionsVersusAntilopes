@@ -9,14 +9,26 @@ DataLoader::DataLoader()
 {
 	rapidxml::file<> xmlFile("GameData.xml"); 
 	m_fileReader.parse<0>(xmlFile.data());
-	m_nodeLion = m_fileReader.first_node()->first_node("lion");
-	m_nodeAntilope = m_fileReader.first_node()->first_node("antilope");
-	m_nodeNumbersAnimal = m_fileReader.first_node()->first_node("numberAnimals");
-	m_nodeFlag= m_fileReader.first_node()->first_node("flag");
+
+	rapidxml::xml_node<char> * root = m_fileReader.first_node();
+
+	for (rapidxml::xml_node<char> * it_n = root->first_node(); it_n != nullptr; it_n = it_n->next_sibling())
+	{
+		std::string key_n = it_n->name();
+		for (rapidxml::xml_node<char> * it_a = root->first_node(); it_a != nullptr; it_a = it_a->next_sibling())
+		{
+			std::string key_a = it_a->name();
+			std::string key_av = it_a->value();
+			m_dataMap[key_n][key_a] = key_av;
+		}
+	}
+	std::string s = m_dataMap["flag"]["image"];
+	 s = m_dataMap["flag"]["image"];
 }
 
 DataLoader * DataLoader::getInstance()
 {
+	
 	if (m_instance == 0) m_instance = new DataLoader();
 	return m_instance;
 }

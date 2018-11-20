@@ -93,9 +93,6 @@
     <Image Include="Assets\StoreLogo.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="C:\Users\drmsk\Desktop\cat.png">
-      <Filter>Assets</Filter>
-    </Image>
     <Image Include="lion.png">
       <Filter>Assets</Filter>
     </Image>

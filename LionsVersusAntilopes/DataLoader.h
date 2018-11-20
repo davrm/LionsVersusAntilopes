@@ -1,5 +1,6 @@
 #pragma once
 #include "Libraries/rapidxml_utils.hpp"
+#include <map>
 
 namespace LionsVersusAntilopes
 {
@@ -13,6 +14,7 @@ namespace LionsVersusAntilopes
 		std::string getNumbersAnimalAttribute(std::string key);
 
 	private:
+		std::map< std::string, std::map<std::string, std::string> > m_dataMap;
 		static DataLoader * m_instance;
 		DataLoader();
 		rapidxml::xml_document<> m_fileReader;
