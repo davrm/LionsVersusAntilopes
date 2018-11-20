@@ -11,6 +11,8 @@ Antilope::~Antilope()
 
 void Antilope::Update(DX::StepTimer const & timer)
 {
+	UpdateMovement(timer);
+	m_tree->Update();
 }
 
 

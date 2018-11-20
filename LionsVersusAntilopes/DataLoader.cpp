@@ -15,15 +15,13 @@ DataLoader::DataLoader()
 	for (rapidxml::xml_node<char> * it_n = root->first_node(); it_n != nullptr; it_n = it_n->next_sibling())
 	{
 		std::string key_n = it_n->name();
-		for (rapidxml::xml_node<char> * it_a = root->first_node(); it_a != nullptr; it_a = it_a->next_sibling())
+		for (rapidxml::xml_attribute<char> * it_a = it_n->first_attribute(); it_a != nullptr; it_a = it_a->next_attribute())
 		{
 			std::string key_a = it_a->name();
 			std::string key_av = it_a->value();
 			m_dataMap[key_n][key_a] = key_av;
 		}
 	}
-	std::string s = m_dataMap["flag"]["image"];
-	 s = m_dataMap["flag"]["image"];
 }
 
 DataLoader * DataLoader::getInstance()
@@ -35,20 +33,20 @@ DataLoader * DataLoader::getInstance()
 
 std::string DataLoader::getLionAttribute(std::string key)
 {
-	return std::string(m_nodeLion->first_attribute(key.c_str())->value());
+	return m_dataMap["lion"][key];
 }
 
 std::string DataLoader::getAntilopeAttribute(std::string key)
 {
-	return std::string(m_nodeAntilope->first_attribute(key.c_str())->value());
+	return m_dataMap["antilope"][key];
 }
 
 std::string DataLoader::getFlagAttribute(std::string key)
 {
-	return std::string(m_nodeFlag->first_attribute(key.c_str())->value());
+	return m_dataMap["flag"][key];
 }
 
 std::string DataLoader::getNumbersAnimalAttribute(std::string key)
 {
-	return std::string(m_nodeLion->first_attribute(key.c_str())->value());
+	return m_dataMap["numberAnimals"][key];
 }

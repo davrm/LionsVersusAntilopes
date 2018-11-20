@@ -8,12 +8,12 @@
 
   <flag
     image = "flag.png"
-    imageScale = "0.1">
+    imageScale = "0.05">
   </flag>
 
   <lion
     image = "lion.png"
-    imageScale = "0.1"
+    imageScale = "0.05"
     life = "100"
     damage ="10"
     distanceWhenAnimalIsFar ="20"
@@ -24,7 +24,7 @@
 
   <antilope
     image = "antilope.png"
-    imageScale = "0.1"
+    imageScale = "0.05"
     life = "100"
     damage ="10"
     distanceWhenAnimalIsFar ="20"

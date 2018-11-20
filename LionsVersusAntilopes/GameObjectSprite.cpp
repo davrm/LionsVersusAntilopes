@@ -48,6 +48,11 @@ void GameObjectSprite::Update(DX::StepTimer const & timer)
 {
 }
 
+void GameObjectSprite::setColor(DirectX::XMVECTOR color)
+{
+	m_colorSprite = color;
+}
+
 void GameObjectSprite::Render()
 {
 	// Calculate Offset point if the window change size
@@ -55,7 +60,7 @@ void GameObjectSprite::Render()
 	DirectX::SimpleMath::Vector2 offset = Vector2(outputSize.Width / 2.f, outputSize.Height / 2.f);
 	// Render Of the Sprite
 	m_spriteBatch->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
-	m_spriteBatch->Draw(m_texture.Get(), offset + m_screenPos, nullptr, Colors::White,
+	m_spriteBatch->Draw(m_texture.Get(), offset + m_screenPos, nullptr, m_colorSprite,
 		0.f, m_origin, m_imageScale);
 	m_spriteBatch->End();
 }

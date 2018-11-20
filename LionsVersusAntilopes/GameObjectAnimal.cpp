@@ -22,6 +22,7 @@ GameObjectAnimal* GameObjectAnimal::GetNearestAlly() {
 bool GameObjectAnimal::IsFarFromOtherAnimalsOfMyTeam()
 {
 	GameObjectAnimal* nearest_ally = GetNearestAlly();
+	if (nearest_ally == nullptr) return false;
 	if(m_distanceWhenAnimalIsFar > DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos())) return true;
 	else return false;
 }
@@ -74,4 +75,14 @@ Node::Status GameObjectAnimal::GoToOurFlag() {
 
 Node::Status GameObjectAnimal::AttackEnemy() {
 	return Node::Status::Fail;
+}
+
+void GameObjectAnimal::setEnemyFlag(Flag * flag)
+{
+	m_enemyFlag = flag;
+}
+
+void GameObjectAnimal::setTeamFlag(Flag * flag)
+{
+	m_myFlag = flag;
 }

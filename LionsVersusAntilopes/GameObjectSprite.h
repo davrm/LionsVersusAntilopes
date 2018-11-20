@@ -14,7 +14,7 @@ namespace LionsVersusAntilopes
 			double image_scale = 0.1, 
 			DirectX::SimpleMath::Vector2 init_point = DirectX::SimpleMath::Vector2::Zero
 		);
-
+		void setColor(DirectX::XMVECTOR color);
 		void UpdateMovement(DX::StepTimer const& timer);
 		virtual void Update(DX::StepTimer const& timer);
 		void Render();
@@ -45,6 +45,7 @@ namespace LionsVersusAntilopes
 		// Scale Position
 		const double m_multScalePosition = 10.0;
 		const double m_imageScale = 0.1;
+		DirectX::XMVECTOR m_colorSprite = DirectX::Colors::White;
 	};
 }
 

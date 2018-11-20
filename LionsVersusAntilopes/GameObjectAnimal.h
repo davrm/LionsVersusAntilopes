@@ -10,7 +10,13 @@ namespace LionsVersusAntilopes
 		public GameObjectSprite
 	{
 	public:
-		GameObjectAnimal(const std::shared_ptr<DX::DeviceResources>& deviceResources, std::string file_name) : GameObjectSprite(deviceResources,file_name) {}
+		GameObjectAnimal(
+			const std::shared_ptr<DX::DeviceResources>& deviceResources, 
+			std::string file_name, 
+			double image_scale, 
+			DirectX::SimpleMath::Vector2 init_point
+		) : GameObjectSprite(deviceResources,file_name,image_scale, init_point) {}
+
 		~GameObjectAnimal();
 		GameObjectAnimal * GetNearestAlly();
 		bool IsFarFromOtherAnimalsOfMyTeam();
@@ -22,6 +28,9 @@ namespace LionsVersusAntilopes
 		Node::Status CaptureEnemyFlag();
 		Node::Status GoToOurFlag();
 		Node::Status AttackEnemy();
+
+		void setEnemyFlag(Flag * flag);
+		void setTeamFlag(Flag * flag);
 	private:
 		double m_life;
 		double m_damage;

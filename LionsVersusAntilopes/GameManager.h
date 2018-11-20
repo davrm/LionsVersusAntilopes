@@ -19,7 +19,7 @@ namespace LionsVersusAntilopes
 		std::vector<Lion*> m_lionTeam;
 		std::vector<Antilope*> m_antilopeTeam;
 		Flag * m_lionTeamFlag;
-		Flag * m_antilopeFlag;
+		Flag * m_antilopeTeamFlag;
 
 		GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResources);
 	};
