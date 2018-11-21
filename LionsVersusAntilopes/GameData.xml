@@ -2,8 +2,8 @@
 <root>
 
   <numberAnimals
-    lions ="2"
-    antilopes ="2">
+    lions ="3"
+    antilopes ="7">
   </numberAnimals>
 
   <flag
@@ -16,6 +16,7 @@
     imageScale = "0.05"
     life = "100"
     damage ="10"
+    speed ="2"
     distanceWhenAnimalIsFar ="20"
     distanceToComeClose="3"
     distanceToApproach="6"
@@ -27,6 +28,7 @@
     imageScale = "0.05"
     life = "100"
     damage ="10"
+    speed="3"
     distanceWhenAnimalIsFar ="20"
     distanceToComeClose="3"
     distanceToApproach="6"

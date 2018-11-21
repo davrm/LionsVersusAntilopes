@@ -27,13 +27,14 @@ void LionsVersusAntilopes::Antilope::InitBehaviourTree()
 	Sequence *sq1 = new Sequence(), *sq2 = new Sequence(), 
 		*sq3 = new Sequence(), *sq4 = new Sequence(), 
 		*sq5 = new Sequence(), *sq6 = new Sequence();
-	Inverter *i1 = new Inverter(), *i2 = new Inverter();
+	Inverter *i1 = new Inverter(), *i2 = new Inverter(), *i3 = new Inverter();
 	///////////////////////////////////
 	
 	Conditional *cFarFromOtherAnimalsOfMyTeam = new Conditional(std::bind(&GameObjectAnimal::IsFarFromOtherAnimalsOfMyTeam, this));
 	Conditional *cOurTeamHaveTheFlag = new Conditional(std::bind(&GameObjectAnimal::IsOurTeamHavingTheFlag, this));
 	Conditional *cEnemyTeamHaveTheFlag = new Conditional(std::bind(&GameObjectAnimal::IsEnemyTeamHavingTheFlag, this));
 	Conditional *cIHaveTheFlag = new Conditional(std::bind(&GameObjectAnimal::IsThisAnimalHavinfTheFlag, this));
+	Conditional *cIHaveTheFlag2 = new Conditional(std::bind(&GameObjectAnimal::IsThisAnimalHavinfTheFlag, this));
 	///////////////////////////////////
 	Action *aGoTotheNearestTeammate = new Action(std::bind(&GameObjectAnimal::GoTotheNearestTeammate, this));
 	Action *aGotoTheEnemyFlag = new Action(std::bind(&GameObjectAnimal::GotoTheEnemyFlag, this));
@@ -66,7 +67,9 @@ void LionsVersusAntilopes::Antilope::InitBehaviourTree()
 	//---------------------------------
 	s1->AddChildren({sq1,sq2,sq3,sq4});
 	//---------------------------------
-	sq1->AddChildren({ cFarFromOtherAnimalsOfMyTeam,aGoTotheNearestTeammate });
+	sq1->AddChildren({ i3,cFarFromOtherAnimalsOfMyTeam,aGoTotheNearestTeammate });
+	//---------------------------------
+	i3->setChild(cIHaveTheFlag2);
 	//---------------------------------
 	sq2->AddChildren({i1,s2,sq5});
 	//---------------------------------

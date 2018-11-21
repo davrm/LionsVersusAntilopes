@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "GameManager.h"
+#include <math.h>
+
 
 using namespace LionsVersusAntilopes;
 
@@ -27,9 +29,13 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 	m_antilopeTeamFlag->setColor(DirectX::Colors::Blue);
 	m_lionTeamFlag->setColor(DirectX::Colors::Red);
 
+	std::vector<DirectX::SimpleMath::Vector2> antilopes_spawns = getSpwanPoints(num_antilopes,5.0, m_originPointFlagAntilope,45);
+	std::vector<DirectX::SimpleMath::Vector2> lions_spawns = getSpwanPoints(num_lions,5.0, m_originPointFlagLion,45);
+
+
 	for (int i = num_antilopes; i--;) {
 		Antilope * temp_antilope = new Antilope(deviceResources, d_loader->getAntilopeAttribute("image"),
-			std::stod(d_loader->getAntilopeAttribute("imageScale")), m_originPointFlagAntilope);
+			std::stod(d_loader->getAntilopeAttribute("imageScale")), antilopes_spawns.at(i));
 		temp_antilope->setEnemyFlag(m_lionTeamFlag);
 		temp_antilope->setTeamFlag(m_antilopeTeamFlag);
 		m_objectsToRender.push_back(temp_antilope);
@@ -38,7 +44,7 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 
 	for (int i = num_lions; i--;) {
 		Lion * temp_lion = new Lion(deviceResources, d_loader->getLionAttribute("image"),
-			std::stod(d_loader->getLionAttribute("imageScale")), m_originPointFlagLion);
+			std::stod(d_loader->getLionAttribute("imageScale")), lions_spawns.at(i));
 		temp_lion->setEnemyFlag(m_antilopeTeamFlag);
 		temp_lion->setTeamFlag(m_lionTeamFlag);
 		m_objectsToRender.push_back(temp_lion);
@@ -61,6 +67,22 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 	}
 
 }
+
+
+std::vector<DirectX::SimpleMath::Vector2> GameManager::getSpwanPoints(int num_spawns, double dist, DirectX::SimpleMath::Vector2 center, double offset_angle) {
+	std::vector<DirectX::SimpleMath::Vector2> result;
+	double angle = 360.0 / num_spawns;
+
+	for (int i = num_spawns; i--;) {
+		DirectX::SimpleMath::Vector2 temp = DirectX::SimpleMath::Vector2();
+		temp.x = cos((angle*i + offset_angle)*(3.141592653589793238463 / 180.0))*dist + center.x;
+		temp.y = sin((angle*i + offset_angle)*(3.141592653589793238463 / 180.0))*dist + center.y;
+		result.push_back(temp);
+	}
+
+	return result;
+}
+
 
 GameManager * GameManager::m_instance = 0;
 

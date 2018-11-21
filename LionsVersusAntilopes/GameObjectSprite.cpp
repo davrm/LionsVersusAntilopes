@@ -39,11 +39,24 @@ GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& d
 }
 
 
+
 void GameObjectSprite::UpdateMovement(DX::StepTimer const & timer)
 {
+	
+	for (std::vector<GameObjectSprite*>::iterator it = m_gameObjectsCollision.begin(); it != m_gameObjectsCollision.end(); it++)
+	{
+		if (Vector2::Distance((*it)->getPos(), this->getPos()) < 2 && (*it) != this)
+		{
+			Vector2 v = Vector2(this->getPos().x - (*it)->getPos().x, this->getPos().y - (*it)->getPos().y);
+			v.Normalize();
+			m_screenPos += v * m_speed;
+			return;
+		}
+	}
+
 	Vector2 v = Vector2(m_targetPoint.x - m_screenPos.x, m_targetPoint.y - m_screenPos.y);
 	v.Normalize();
-	m_screenPos += v*m_speed;
+	if(Vector2::Distance(m_screenPos, m_targetPoint)>2) m_screenPos += v*m_speed;
 }
 
 void GameObjectSprite::Update(DX::StepTimer const & timer)
@@ -85,11 +98,11 @@ void LionsVersusAntilopes::GameObjectSprite::setTargetPoint(DirectX::SimpleMath:
 	else {
 		DirectX::SimpleMath::Vector2 dir = DirectX::SimpleMath::Vector2(origin.x - pos.x, origin.y - pos.y);
 		dir.Normalize();
-		m_targetPoint = dir * dist;
+		m_targetPoint = ((dir * dist)+pos) * m_multScalePosition;
 	}
 }
 
-DirectX::SimpleMath::Vector2 LionsVersusAntilopes::GameObjectSprite::GetPos()
+DirectX::SimpleMath::Vector2 LionsVersusAntilopes::GameObjectSprite::getPos()
 {
 	return m_screenPos / m_multScalePosition;
 }

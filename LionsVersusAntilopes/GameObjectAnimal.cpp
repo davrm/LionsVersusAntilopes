@@ -12,7 +12,7 @@ GameObjectAnimal* GameObjectAnimal::GetNearestAlly() {
 	GameObjectAnimal* result = nullptr;
 	double shorter_distance = std::numeric_limits<double>::infinity();
 	for (std::vector<GameObjectAnimal*>::iterator it = m_alliesInView.begin(); it != m_alliesInView.end(); it++) {
-		if (shorter_distance > DirectX::SimpleMath::Vector2::Distance((*it)->GetPos(),GetPos())) 
+		if (shorter_distance > DirectX::SimpleMath::Vector2::Distance((*it)->getPos(),getPos())) 
 			result = *it;
 	}
 	return result;
@@ -23,7 +23,7 @@ bool GameObjectAnimal::IsFarFromOtherAnimalsOfMyTeam()
 {
 	GameObjectAnimal* nearest_ally = GetNearestAlly();
 	if (nearest_ally == nullptr) return false;
-	if(m_distanceWhenAnimalIsFar < DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos())) return true;
+	if(m_distanceWhenAnimalIsFar < DirectX::SimpleMath::Vector2::Distance(nearest_ally->getPos(), getPos())) return true;
 	else return false;
 }
 
@@ -53,33 +53,44 @@ bool GameObjectAnimal::IsThisAnimalHavinfTheFlag()
 
 Node::Status GameObjectAnimal::GoTotheNearestTeammate() {
 	GameObjectAnimal* nearest_ally = GetNearestAlly();
-	if (m_distanceToComeClose > DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos()))
+	if (m_distanceToComeClose > DirectX::SimpleMath::Vector2::Distance(nearest_ally->getPos(), getPos()))
 		return Node::Status::Ok;
 	else {
-		setTargetPoint(nearest_ally->GetPos(), m_distanceToApproach, GetPos());
+		setTargetPoint(nearest_ally->getPos(), m_distanceToApproach, getPos());
 		return Node::Status::Active;
 	}
 }
 
 Node::Status GameObjectAnimal::GotoTheEnemyFlag() {
 
-	DirectX::SimpleMath::Vector2 flag_pos = m_enemyFlag->GetPos();
-	double dist = DirectX::SimpleMath::Vector2::Distance(GetPos(), flag_pos);
+	DirectX::SimpleMath::Vector2 flag_pos = m_enemyFlag->getPos();
+	double dist = DirectX::SimpleMath::Vector2::Distance(getPos(), flag_pos);
+	if (dist > m_distanceToCaptureFlag && m_enemyFlag->getTransporter() == nullptr) {
+		setTargetPoint(flag_pos);
+		return Node::Status::Active;
+	}
+	else if (m_enemyFlag->getTransporter() == nullptr || m_enemyFlag->getTransporter() == this)
+	{
+		m_enemyFlag->SetTransporter(this);
+		m_hasTheFlag = true;
+		return Node::Status::Ok;	
+	}
+	else return Node::Status::Fail;
+}
+
+Node::Status GameObjectAnimal::CaptureEnemyFlag() {
+	DirectX::SimpleMath::Vector2 flag_pos = m_myFlag->getPos();
+	double dist = DirectX::SimpleMath::Vector2::Distance(getPos(), flag_pos);
 	if (dist > m_distanceToCaptureFlag) {
 		setTargetPoint(flag_pos);
 		return Node::Status::Active;
 	}
-	else
+	else if (m_enemyFlag->getTransporter() == this)
 	{
+
 		return Node::Status::Ok;
 	}
-	
-
-	return Node::Status::Fail;
-}
-
-Node::Status GameObjectAnimal::CaptureEnemyFlag() {
-	return Node::Status::Fail;
+	else return Node::Status::Fail;
 }
 
 Node::Status GameObjectAnimal::GoToOurFlag() {
@@ -103,9 +114,11 @@ void GameObjectAnimal::setTeamFlag(Flag * flag)
 void GameObjectAnimal::setAllies(std::vector<GameObjectAnimal*> allies)
 {
 	m_alliesInView = allies;
+	m_gameObjectsCollision.insert(m_gameObjectsCollision.end(),allies.begin(),allies.end());
 }
 
 void GameObjectAnimal::setEnemies(std::vector<GameObjectAnimal*> enemies)
 {
 	m_enemiesInView = enemies;
+	m_gameObjectsCollision.insert(m_gameObjectsCollision.end(), enemies.begin(), enemies.end());
 }

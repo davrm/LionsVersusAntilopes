@@ -22,6 +22,7 @@ namespace LionsVersusAntilopes
 		Flag * m_antilopeTeamFlag;
 
 		GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+		std::vector<DirectX::SimpleMath::Vector2> getSpwanPoints(int num_spawns, double dist, DirectX::SimpleMath::Vector2 center, double offset_angle);
 	};
 }
 

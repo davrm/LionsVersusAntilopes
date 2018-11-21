@@ -14,6 +14,9 @@ namespace LionsVersusAntilopes
 			double image_scale = 0.1, 
 			DirectX::SimpleMath::Vector2 init_point = DirectX::SimpleMath::Vector2::Zero
 		);
+
+		
+
 		void setColor(DirectX::XMVECTOR color);
 		void UpdateMovement(DX::StepTimer const& timer);
 		virtual void Update(DX::StepTimer const& timer);
@@ -25,8 +28,9 @@ namespace LionsVersusAntilopes
 			double dist = 0.0, 
 			DirectX::SimpleMath::Vector2 origin = DirectX::SimpleMath::Vector2::Zero
 		);
-		DirectX::SimpleMath::Vector2 GetPos();
+		DirectX::SimpleMath::Vector2 getPos();
 	protected:
+		std::vector<GameObjectSprite*> m_gameObjectsCollision;
 		// Movement
 		double m_speed = 3.;
 		double m_cont = 0;
