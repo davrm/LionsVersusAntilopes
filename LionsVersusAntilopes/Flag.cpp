@@ -10,8 +10,8 @@ Flag::~Flag()
 
 void Flag::Update(DX::StepTimer const & timer)
 {
-	if (m_isTransported) SetTargetPoint(m_transporter->GetPos(), 3, GetPos());
-	else SetTargetPoint(m_originPoint);
+	if (m_isTransported) setTargetPoint(m_transporter->GetPos(), 3, GetPos());
+	else setTargetPoint(m_originPoint);
 }
 
 bool Flag::IsInspawn()

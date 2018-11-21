@@ -33,7 +33,7 @@ GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& d
 	m_origin.x = float(catDesc.Width / 2);
 	m_origin.y = float(catDesc.Height / 2);
 	// Initial Point
-	SetPos(init_point);
+	setPos(init_point);
 	// Get State for Alpha Mode in the Sprite
 	m_states = std::make_unique<CommonStates>(m_deviceResources->GetD3DDevice());
 }
@@ -41,7 +41,9 @@ GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& d
 
 void GameObjectSprite::UpdateMovement(DX::StepTimer const & timer)
 {
-	m_screenPos = Vector2::Lerp(m_screenPos, m_targetPoint, m_speed * timer.GetElapsedSeconds());
+	Vector2 v = Vector2(m_targetPoint.x - m_screenPos.x, m_targetPoint.y - m_screenPos.y);
+	v.Normalize();
+	m_screenPos += v*m_speed;
 }
 
 void GameObjectSprite::Update(DX::StepTimer const & timer)
@@ -72,19 +74,14 @@ void GameObjectSprite::Reset()
 	m_states.reset();
 }
 
-void GameObjectSprite::SetTargetpoint(Vector2 target)
-{
-	m_targetPoint = target;
-}
-
-void LionsVersusAntilopes::GameObjectSprite::SetPos(DirectX::SimpleMath::Vector2 pos)
+void LionsVersusAntilopes::GameObjectSprite::setPos(DirectX::SimpleMath::Vector2 pos)
 {
 	m_screenPos = pos * m_multScalePosition;
 }
 
-void LionsVersusAntilopes::GameObjectSprite::SetTargetPoint(DirectX::SimpleMath::Vector2 pos, double dist, DirectX::SimpleMath::Vector2 origin)
+void LionsVersusAntilopes::GameObjectSprite::setTargetPoint(DirectX::SimpleMath::Vector2 pos, double dist, DirectX::SimpleMath::Vector2 origin)
 {
-	if (dist == 0) m_targetPoint = pos;
+	if (dist == 0) m_targetPoint = pos * m_multScalePosition;
 	else {
 		DirectX::SimpleMath::Vector2 dir = DirectX::SimpleMath::Vector2(origin.x - pos.x, origin.y - pos.y);
 		dir.Normalize();

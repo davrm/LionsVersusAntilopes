@@ -41,6 +41,26 @@ void LionsVersusAntilopes::Antilope::InitBehaviourTree()
 	Action *aGoToOurFlag = new Action(std::bind(&GameObjectAnimal::GoToOurFlag, this));
 	Action *aAttackEnemy = new Action(std::bind(&GameObjectAnimal::AttackEnemy, this));
 	///////////////////////////////////
+	s1->setName("s1");
+	s2->setName("s2");
+	sq1->setName("sq1");
+	sq2->setName("sq2");
+	sq3->setName("sq3");
+	sq4->setName("sq4");
+	sq5->setName("sq5");
+	sq6->setName("sq6");
+
+	cFarFromOtherAnimalsOfMyTeam->setName("cFarFromOtherAnimalsOfMyTeam");
+	cOurTeamHaveTheFlag->setName("cOurTeamHaveTheFlag");
+	cEnemyTeamHaveTheFlag->setName("cEnemyTeamHaveTheFlag");
+	cIHaveTheFlag->setName("cIHaveTheFlag");
+
+	aGoTotheNearestTeammate->setName("aGoTotheNearestTeammate");
+	aGotoTheEnemyFlag->setName("aGotoTheEnemyFlag");
+	aCaptureEnemyFlag->setName("aCaptureEnemyFlag");
+	aGoToOurFlag->setName("aGoToOurFlag");
+	aAttackEnemy->setName("aAttackEnemy");
+	///////////////////////////////////
 	//---------------------------------
 	root->setChild(s1);
 	//---------------------------------

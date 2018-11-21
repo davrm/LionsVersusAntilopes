@@ -39,7 +39,7 @@ namespace LionsVersusAntilopes
 		const double m_distanceWhenAnimalIsFar = 20.0;
 		const double m_distanceToApproach = 3.0;
 		const double m_distanceToComeClose = 6.0;
-		const double m_distanceToCaptureFlag = 4.0;
+		const double m_distanceToCaptureFlag = 1.0;
 		bool m_hasTheFlag = false;
 		int m_numberOfEnemiesAttacking;
 		int m_minNumberEnemiesForDamage;

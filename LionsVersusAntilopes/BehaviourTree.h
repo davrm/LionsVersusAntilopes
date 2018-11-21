@@ -6,9 +6,14 @@ namespace LionsVersusAntilopes
 
 	class Node {
 	public:
+		Node(std::string name = "unnamed") : m_name(name) {}
 		enum Status { Fail = 0, Ok = 1, Active = 2 };
-		Status PresentStatus = Fail;
 		virtual Status Update() = 0;
+		std::string getName() { return m_name; }
+		void setName(std::string name) { m_name = name; }
+	private:
+		std::string m_name;
+
 	};
 
 	class CompositeNode : public Node {
@@ -24,9 +29,10 @@ namespace LionsVersusAntilopes
 	public:
 		virtual Status Update() override {
 			for (Node* child : GetChildren()) {
-				if (child->Update() == Node::Status::Active)
+				Node::Status st = child->Update();
+				if (st == Node::Status::Active)
 					return Node::Status::Active;
-				else if (child->Update() == Node::Status::Ok)
+				else if (st == Node::Status::Ok)
 					return Node::Status::Ok;
 			}
 			return Node::Status::Fail;
@@ -37,9 +43,10 @@ namespace LionsVersusAntilopes
 	public:
 		virtual Status Update() override {
 			for (Node* child : GetChildren()) {
-				if (child->Update() == Node::Status::Active)
+				Node::Status st = child->Update();
+				if (st == Node::Status::Active)
 					return Node::Status::Active;
-				else if (child->Update() == Node::Status::Fail)
+				else if (st == Node::Status::Fail)
 					return Node::Status::Fail;
 			}
 			return Node::Status::Ok;
@@ -65,8 +72,9 @@ namespace LionsVersusAntilopes
 	private:
 		virtual Status Update() override 
 		{ 
-			if (Status::Ok) Status::Fail;
-			else if(Status::Fail) Status::Ok;
+			Node::Status st = getChild()->Update();
+			if (st == Status::Ok) return Status::Fail;
+			else if(st == Status::Fail) return Status::Ok;
 			else return Status::Active; 
 		}
 	};

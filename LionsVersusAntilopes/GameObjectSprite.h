@@ -19,9 +19,8 @@ namespace LionsVersusAntilopes
 		virtual void Update(DX::StepTimer const& timer);
 		void Render();
 		void Reset();
-		void SetTargetpoint(DirectX::SimpleMath::Vector2 target);
-		void SetPos(DirectX::SimpleMath::Vector2 pos);
-		void SetTargetPoint(
+		void setPos(DirectX::SimpleMath::Vector2 pos);
+		void setTargetPoint(
 			DirectX::SimpleMath::Vector2 pos, 
 			double dist = 0.0, 
 			DirectX::SimpleMath::Vector2 origin = DirectX::SimpleMath::Vector2::Zero
@@ -29,7 +28,7 @@ namespace LionsVersusAntilopes
 		DirectX::SimpleMath::Vector2 GetPos();
 	protected:
 		// Movement
-		double m_speed = 0.2f;
+		double m_speed = 3.;
 		double m_cont = 0;
 	private:
 		// Sprite 

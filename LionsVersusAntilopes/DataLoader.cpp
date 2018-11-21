@@ -9,9 +9,7 @@ DataLoader::DataLoader()
 {
 	rapidxml::file<> xmlFile("GameData.xml"); 
 	m_fileReader.parse<0>(xmlFile.data());
-
 	rapidxml::xml_node<char> * root = m_fileReader.first_node();
-
 	for (rapidxml::xml_node<char> * it_n = root->first_node(); it_n != nullptr; it_n = it_n->next_sibling())
 	{
 		std::string key_n = it_n->name();

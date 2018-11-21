@@ -56,12 +56,25 @@ Node::Status GameObjectAnimal::GoTotheNearestTeammate() {
 	if (m_distanceToComeClose > DirectX::SimpleMath::Vector2::Distance(nearest_ally->GetPos(), GetPos()))
 		return Node::Status::Ok;
 	else {
-		SetTargetPoint(nearest_ally->GetPos(), m_distanceToApproach, GetPos());
+		setTargetPoint(nearest_ally->GetPos(), m_distanceToApproach, GetPos());
 		return Node::Status::Active;
 	}
 }
 
 Node::Status GameObjectAnimal::GotoTheEnemyFlag() {
+
+	DirectX::SimpleMath::Vector2 flag_pos = m_enemyFlag->GetPos();
+	double dist = DirectX::SimpleMath::Vector2::Distance(GetPos(), flag_pos);
+	if (dist > m_distanceToCaptureFlag) {
+		setTargetPoint(flag_pos);
+		return Node::Status::Active;
+	}
+	else
+	{
+		return Node::Status::Ok;
+	}
+	
+
 	return Node::Status::Fail;
 }
 
