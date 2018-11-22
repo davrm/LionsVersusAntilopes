@@ -2,11 +2,8 @@
 #include "GameObjectSprite.h"
 #include "Common\DirectXHelper.h"
 
-using namespace Windows::Foundation;
 using namespace LionsVersusAntilopes;
-using namespace DirectX;
-using namespace DirectX::SimpleMath;
-using Microsoft::WRL::ComPtr;
+
 
 GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& deviceResources, 
 	std::string file_name, double image_scale, Vector2 init_point):

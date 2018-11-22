@@ -11,7 +11,7 @@ namespace LionsVersusAntilopes
 			std::string file_name, double image_scale, 
 			DirectX::SimpleMath::Vector2 origin_point
 		) : GameObjectSprite(deviceResources,file_name, image_scale, origin_point), m_originPoint(origin_point){}
-		~Flag();
+		~Flag() override {}
 		void Update(DX::StepTimer const& timer) override;
 		bool IsInspawn();
 		void SetTransporter(GameObjectSprite* transporter);

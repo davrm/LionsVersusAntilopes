@@ -3,6 +3,11 @@
 #include "..\Common\DeviceResources.h"
 #include "..\Common\StepTimer.h"
 
+using namespace DirectX;
+using namespace DirectX::SimpleMath;
+using Microsoft::WRL::ComPtr;
+using namespace Windows::Foundation;
+
 namespace LionsVersusAntilopes
 {
 	class GameObjectSprite
@@ -12,9 +17,10 @@ namespace LionsVersusAntilopes
 			const std::shared_ptr<DX::DeviceResources>& deviceResources, 
 			std::string file_name, 
 			double image_scale = 0.1, 
-			DirectX::SimpleMath::Vector2 init_point = DirectX::SimpleMath::Vector2::Zero
+			Vector2 init_point = Vector2::Zero
 		);
 
+		virtual ~GameObjectSprite() {}
 		
 
 		void setColor(DirectX::XMVECTOR color);
@@ -22,13 +28,13 @@ namespace LionsVersusAntilopes
 		virtual void Update(DX::StepTimer const& timer);
 		void Render();
 		void Reset();
-		void setPos(DirectX::SimpleMath::Vector2 pos);
+		void setPos(Vector2 pos);
 		void setTargetPoint(
-			DirectX::SimpleMath::Vector2 pos, 
+			Vector2 pos, 
 			double dist = 0.0, 
-			DirectX::SimpleMath::Vector2 origin = DirectX::SimpleMath::Vector2::Zero
+			Vector2 origin = Vector2::Zero
 		);
-		DirectX::SimpleMath::Vector2 getPos();
+		Vector2 getPos();
 	protected:
 		std::vector<GameObjectSprite*> m_gameObjectsCollision;
 		// Movement
@@ -38,13 +44,13 @@ namespace LionsVersusAntilopes
 		// Sprite 
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
 		std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
-		DirectX::SimpleMath::Vector2 m_screenPos;
-		DirectX::SimpleMath::Vector2 m_origin;
+		Vector2 m_screenPos;
+		Vector2 m_origin;
 		const std::shared_ptr<DX::DeviceResources> m_deviceResources;
 		std::unique_ptr<DirectX::CommonStates> m_states;
 		std::string m_fileImageName;
 		// Movement
-		DirectX::SimpleMath::Vector2 m_targetPoint;
+		Vector2 m_targetPoint;
 		// Scale Position
 		const double m_multScalePosition = 10.0;
 		const double m_imageScale = 0.1;

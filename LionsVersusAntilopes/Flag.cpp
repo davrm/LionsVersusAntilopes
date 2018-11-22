@@ -3,11 +3,6 @@
 
 using namespace LionsVersusAntilopes;
 
-
-Flag::~Flag()
-{
-}
-
 void Flag::Update(DX::StepTimer const & timer)
 {
 	UpdateMovement(timer);
