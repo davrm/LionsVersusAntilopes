@@ -7,7 +7,11 @@ using namespace LionsVersusAntilopes;
 
 GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResources)
 {
+	InitObjects(deviceResources);
+}
 
+void GameManager::InitObjects(const std::shared_ptr<DX::DeviceResources>& deviceResources)
+{
 	DataLoader * d_loader = DataLoader::getInstance();
 
 	int num_antilopes = std::stoi(d_loader->getNumbersAnimalAttribute("antilopes"));
@@ -29,8 +33,8 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 	m_antilopeTeamFlag->setColor(DirectX::Colors::Blue);
 	m_lionTeamFlag->setColor(DirectX::Colors::Red);
 
-	std::vector<DirectX::SimpleMath::Vector2> antilopes_spawns = getSpwanPoints(num_antilopes,5.0, m_originPointFlagAntilope,45);
-	std::vector<DirectX::SimpleMath::Vector2> lions_spawns = getSpwanPoints(num_lions,5.0, m_originPointFlagLion,45);
+	std::vector<DirectX::SimpleMath::Vector2> antilopes_spawns = getSpwanPoints(num_antilopes, 5.0, m_originPointFlagAntilope, 45);
+	std::vector<DirectX::SimpleMath::Vector2> lions_spawns = getSpwanPoints(num_lions, 5.0, m_originPointFlagLion, 45);
 
 
 	for (int i = num_antilopes; i--;) {
@@ -65,7 +69,6 @@ GameManager::GameManager(const std::shared_ptr<DX::DeviceResources>& deviceResou
 		(*it)->setAllies(tempCopy);
 		(*it)->setEnemies(m_antilopeTeam);
 	}
-
 }
 
 

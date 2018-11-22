@@ -42,21 +42,32 @@ GameObjectSprite::GameObjectSprite(const std::shared_ptr<DX::DeviceResources>& d
 
 void GameObjectSprite::UpdateMovement(DX::StepTimer const & timer)
 {
-	
+
+	// Attempt to put a type of physics in the game object sprite
+	// Iterate all the Objects that we want to have a type of collider
+	// If they are at a certain distance forces these objects away
+	// Calculates all the repulsion vectors and add it
+
+	Vector2 sum = Vector2::Zero;
 	for (std::vector<GameObjectSprite*>::iterator it = m_gameObjectsCollision.begin(); it != m_gameObjectsCollision.end(); it++)
 	{
-		if (Vector2::Distance((*it)->getPos(), this->getPos()) < 2 && (*it) != this)
+		if (Vector2::Distance((*it)->getPos(), this->getPos()) < 4 && (*it) != this)
 		{
 			Vector2 v = Vector2(this->getPos().x - (*it)->getPos().x, this->getPos().y - (*it)->getPos().y);
 			v.Normalize();
-			m_screenPos += v * m_speed;
-			return;
+			sum += v;
 		}
 	}
 
+	// Calculate the vector to the Objective and add it
+
 	Vector2 v = Vector2(m_targetPoint.x - m_screenPos.x, m_targetPoint.y - m_screenPos.y);
 	v.Normalize();
-	if(Vector2::Distance(m_screenPos, m_targetPoint)>2) m_screenPos += v*m_speed;
+	sum += v;
+	sum.Normalize();
+
+	// If the target Point is more than 2 pixel of distance, update new position
+	if(Vector2::Distance(m_screenPos, m_targetPoint)>2) m_screenPos += sum*m_speed;
 }
 
 void GameObjectSprite::Update(DX::StepTimer const & timer)
